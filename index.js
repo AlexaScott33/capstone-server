@@ -7,7 +7,10 @@ const morgan = require('morgan');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
+const scheduleRouter = require('./router/schedule');
+
 const app = express();
+
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -21,20 +24,16 @@ app.use(
   })
 );
 
-app.get('/api/schedule', (req, res) => {
-  const matches = [
-    'Game 1',
-    'Game 2',
-    'Game 3',
-    'Game 4',
-    'Game 5',
-    'Game 6',
-    'Game 7',
-    'Game 8'
-  ];
+//Mount router
+app.use('/api', scheduleRouter);
 
-  res.json(matches);
-});
+// Catch-all 404
+// app.use(function (req, res, next) {
+//   const err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
+
 
 function runServer(port = PORT) {
   const server = app
