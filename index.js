@@ -21,6 +21,21 @@ app.use(
   })
 );
 
+app.get('/api/schedule', (req, res) => {
+  const matches = [
+    'Game 1',
+    'Game 2',
+    'Game 3',
+    'Game 4',
+    'Game 5',
+    'Game 6',
+    'Game 7',
+    'Game 8'
+  ];
+
+  res.json(matches);
+});
+
 function runServer(port = PORT) {
   const server = app
     .listen(port, () => {
