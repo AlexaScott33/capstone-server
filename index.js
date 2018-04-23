@@ -10,6 +10,7 @@ const { dbConnect } = require('./db-mongoose');
 
 const matchesRouter = require('./router/matches');
 const commentsRouter = require('./router/comments');
+const predictionsRouter = require('./router/predictions');
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,7 +30,7 @@ app.use(
 //Mount router
 app.use('/api', commentsRouter);
 app.use('/api', matchesRouter);
-
+app.use('/api', predictionsRouter);
 
 // Catch-all 404
 // app.use(function (req, res, next) {
