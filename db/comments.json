@@ -1,18 +1,22 @@
 [
     {
       "_id": "222222222222222222222200",
-      "content": "rugby is awesome!"
+      "content": "rugby is awesome!",
+      "userId": "333333333333333333333300"
     },
     {
       "_id": "222222222222222222222201",
-      "content": "what's a ruck?"
+      "content": "what's a ruck?",
+      "userId": "333333333333333333333300"
     },
     {
       "_id": "222222222222222222222202",
-      "content": "who is number 2?"
+      "content": "who is number 2?",
+      "userId": "333333333333333333333301"
     },
     {
       "_id": "222222222222222222222203",
-      "content": "nice tackle!"
+      "content": "nice tackle!",
+      "userId": "333333333333333333333302"
     }
   ]

@@ -7,6 +7,18 @@ const mongoose = require('mongoose');
 
 const Prediction = require('../models/prediction');
 
+/* ========== GET/READ ALL ITEMS ========== */
+router.get('/predictions', (req, res) => {
+  Prediction.find()
+    .then(results => {
+      res.json(results);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'});
+    });
+});
+
 router.post('/predictions', (req, res) => {
 //if not home away por tie throw error --> otherwise accept and add to db 
   const { prediction } = req.body;

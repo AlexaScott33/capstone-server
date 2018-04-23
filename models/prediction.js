@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 //one value --> string
 const predictionSchema = new mongoose.Schema({
-  prediction: { type: String, required: true, enum: ['home', 'away', 'tie']}
+  prediction: { type: String, enum: ['home', 'away', 'tie']}
 });
 
 

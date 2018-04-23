@@ -8,13 +8,18 @@ const mongoose = require('mongoose');
 const Match = require('../models/match');
 const Comment = require('../models/comment');
 
+//get all matches
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/matches', (req, res) => {
-  const { commentId } = req.query;
+  const { commentId, predictionId } = req.query;
 
   let filter = {};
 
   if (commentId) {
+    filter.comments = commentId;
+  }
+
+  if (predictionId) {
     filter.comments = commentId;
   }
 
@@ -29,6 +34,7 @@ router.get('/matches', (req, res) => {
     });
 });
 
+//get specific match by ID
 /* ========== GET/READ A SINGLE ITEM ========== */
 router.get('/matches/:id', (req, res) => {
   const { id } = req.params;
@@ -49,7 +55,6 @@ router.get('/matches/:id', (req, res) => {
       res.status(500).json({message: 'Internal server error'});
     });
 });
-
 
 
 module.exports = router;

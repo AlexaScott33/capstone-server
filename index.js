@@ -8,9 +8,12 @@ const morgan = require('morgan');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
+const usersRouter = require('./router/users');
 const matchesRouter = require('./router/matches');
 const commentsRouter = require('./router/comments');
-const predictionsRouter = require('./router/predictions');
+
+
+// const predictionsRouter = require('./router/predictions');
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,9 +31,10 @@ app.use(
 );
 
 //Mount router
+app.use('/api', usersRouter);
 app.use('/api', commentsRouter);
 app.use('/api', matchesRouter);
-app.use('/api', predictionsRouter);
+// app.use('/api', predictionsRouter);
 
 // Catch-all 404
 // app.use(function (req, res, next) {
