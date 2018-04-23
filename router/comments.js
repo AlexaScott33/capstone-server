@@ -1,25 +1,18 @@
 'use strict';
 
+
 const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
 
-const Match = require('../models/match');
 const Comment = require('../models/comment');
 
+
 /* ========== GET/READ ALL ITEMS ========== */
-router.get('/matches', (req, res) => {
-  const { commentId } = req.query;
-
-  let filter = {};
-
-  if (commentId) {
-    filter.comments = commentId;
-  }
-
-  Match.find(filter)
-    .populate('comments')
+router.get('/comments', (req, res) => {
+  console.log('!!!!!', req.body);
+  Comment.find()
     .then(results => {
       res.json(results);
     })
@@ -29,20 +22,24 @@ router.get('/matches', (req, res) => {
     });
 });
 
-/* ========== GET/READ A SINGLE ITEM ========== */
-router.get('/matches/:id', (req, res) => {
-  const { id } = req.params;
+/* ========== POST/CREATE NEW ITEMS ========== */
+router.post('/comments', (req, res) => {
+  const { content } = req.body;
+  const newItem = { content };
 
   /***** Never trust users - validate input *****/
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    const err = new Error('The `id` is not valid');
+  if (!content) {
+    const err = new Error('Missing `content` in request body');
     err.status = 400;
     console.error(err);
   }
 
-  Match.findById(id)
-    .then(result => {
-      res.json(result);
+  Comment.create(newItem)
+    .then(() => {
+      Comment.find()
+        .then(results => {
+          res.json(results);
+        });
     })
     .catch(err => {
       console.error(err);
@@ -50,6 +47,8 @@ router.get('/matches/:id', (req, res) => {
     });
 });
 
+  
+    
 
 
 module.exports = router;

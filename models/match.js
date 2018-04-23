@@ -7,7 +7,9 @@ const matchSchema = new mongoose.Schema({
   home: { type: String },
   away: { type: String },
   score: { type: String },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
+
 
 matchSchema.set('toObject', {
   transform: function (doc, ret) {
@@ -18,3 +20,4 @@ matchSchema.set('toObject', {
 });
 
 module.exports = mongoose.model('Match', matchSchema);
+

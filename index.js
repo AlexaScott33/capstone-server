@@ -1,5 +1,6 @@
 'use strict';
 
+const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -7,10 +8,11 @@ const morgan = require('morgan');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
-const scheduleRouter = require('./router/matches');
+const matchesRouter = require('./router/matches');
+const commentsRouter = require('./router/comments');
 
 const app = express();
-
+app.use(bodyParser.json());
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -25,7 +27,9 @@ app.use(
 );
 
 //Mount router
-app.use('/api', scheduleRouter);
+app.use('/api', commentsRouter);
+app.use('/api', matchesRouter);
+
 
 // Catch-all 404
 // app.use(function (req, res, next) {
