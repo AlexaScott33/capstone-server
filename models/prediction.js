@@ -2,10 +2,9 @@
 
 const mongoose = require('mongoose');
 
+//one value --> string
 const predictionSchema = new mongoose.Schema({
-  home: { type: Boolean, default: false },
-  away: { type: Boolean, default: false },
-  tie: { type: Boolean, default: false }
+  prediction: { type: String, required: true, enum: ['home', 'away', 'tie']}
 });
 
 

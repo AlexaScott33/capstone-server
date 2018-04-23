@@ -1,26 +1,14 @@
 [
     {
       "_id": "333333333333333333333300",
-      "home": false,
-      "away": false,
-      "tie": false
+      "prediction": "home"
     },
     {
       "_id": "333333333333333333333301",
-      "home": false,
-      "away": false,
-      "tie": false
+      "prediction": "away"
     },
     {
       "_id": "333333333333333333333302",
-      "home": false,
-      "away": false,
-      "tie": false
-    },
-    {
-      "_id": "333333333333333333333303",
-      "home": false,
-      "away": false,
-      "tie": false
+      "prediction": "tie"
     }
-  ]
+]
