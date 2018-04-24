@@ -27,15 +27,13 @@ router.get('/matches/:id/comments', (req, res) => {
 //create new comment for specific matchId by specific userId
 /* ========== POST/CREATE NEW ITEMS ========== */
 router.post('/matches/:id/comments', (req, res) => {
-  const { content, userId} = req.body;
-
   const { id  } = req.params; 
+  const { content, userId } = req.body;
 
   //TODO: set to req.user.id when login is implemented
   // const userId = '5ade66a7fc0671102fec3a0c';
   // console.log('!!!', req.user.id);
 
-  // const { content, userId } = req.body;
   const newItem = { content, userId };
 
   /***** Never trust users - validate input *****/
@@ -45,15 +43,11 @@ router.post('/matches/:id/comments', (req, res) => {
     console.error(err);
   }
 
-  //match findBYID and update --> find ID
+
   Match.findById(id)
     .then((match) => {
-      Comment.save(newItem)
-        .then((comment) => {
-          Match.findByIdAndUpdate(id, {comment: match.comments.push(comment)} )
-          .then((match) => {
-
-          })
+      Comment.create(newItem)
+        .then(() => {
           Comment.find()
             .then(results => {
               res.json(results);
@@ -66,5 +60,9 @@ router.post('/matches/:id/comments', (req, res) => {
     });
 });
 
+// Match.findByIdAndUpdate(id, {comment: match.comments.push(comment)} )
+// .then((match) => {
+
+// })
 
 module.exports = router;
