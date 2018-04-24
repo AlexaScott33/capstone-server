@@ -36,14 +36,14 @@ router.get('/matches', (req, res) => {
 
 //get specific match by ID
 /* ========== GET/READ A SINGLE ITEM ========== */
-router.get('/matches/:id', (req, res) => {
+router.get('/matches/:id', (req, res, next) => {
   const { id } = req.params;
 
   /***** Never trust users - validate input *****/
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error('The `id` is not valid');
     err.status = 400;
-    console.error(err);
+    return next(err);
   }
 
   Match.findById(id)

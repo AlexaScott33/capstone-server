@@ -26,13 +26,9 @@ router.get('/matches/:id/comments', (req, res) => {
 
 //create new comment for specific matchId by specific userId
 /* ========== POST/CREATE NEW ITEMS ========== */
-router.post('/matches/:id/comments', (req, res) => {
+router.post('/matches/:id/comments', (req, res, next) => {
   const { id  } = req.params; 
   const { content, userId } = req.body;
-
-  //TODO: set to req.user.id when login is implemented
-  // const userId = '5ade66a7fc0671102fec3a0c';
-  // console.log('!!!', req.user.id);
 
   const newItem = { content, userId };
 
@@ -40,18 +36,41 @@ router.post('/matches/:id/comments', (req, res) => {
   if (!content) {
     const err = new Error('Missing `content` in request body');
     err.status = 400;
-    console.error(err);
+    return next(err);
   }
 
+  if (!userId) {
+    const err = new Error('Missing `userId` in request body');
+    err.status = 400;
+    return next(err);
+  }
+
+
+  // Match.findById(id)
+  //   .then((match) => {
+  //     // console.log(match)
+  //     Comment.create(newItem)
+  //       .then((comment) => {
+  //         // console.log(comment)
+  //         // res.json(comment);
+  //       })
+  //       .then((comment) => {
+  //         console.log(comment)
+  //         Match.findByIdAndUpdate(id, { comment: match[0].comments.push(comment.id) } );
+  //       })
+  //       .then()
+  //       .catch(err => {
+  //         console.error(err);
+  //         res.status(500).json({message: 'Internal server error'});
+  //       });
+  //   });
 
   Match.findById(id)
     .then((match) => {
       Comment.create(newItem)
-        .then(() => {
-          Comment.find()
-            .then(results => {
-              res.json(results);
-            });
+        .then((comment) => {
+          console.log('!!', comment.id);
+          Match.findByIdAndUpdate(id, { comments: match.comments.push(comment.id) } );
         })
         .catch(err => {
           console.error(err);
@@ -60,9 +79,6 @@ router.post('/matches/:id/comments', (req, res) => {
     });
 });
 
-// Match.findByIdAndUpdate(id, {comment: match.comments.push(comment)} )
-// .then((match) => {
 
-// })
 
 module.exports = router;
