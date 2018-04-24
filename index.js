@@ -4,13 +4,16 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const passport = require('passport');
 
+const localStrategy = require('./passport/local');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
-const usersRouter = require('./router/users');
 const matchesRouter = require('./router/matches');
 const commentsRouter = require('./router/comments');
+const usersRouter = require('./router/users');
+const authRouter = require('./router/auth');
 
 
 // const predictionsRouter = require('./router/predictions');
@@ -30,8 +33,12 @@ app.use(
   })
 );
 
+//Configure Passport to utilize the strategy
+passport.use(localStrategy);
+
 //Mount router
 app.use('/api', usersRouter);
+app.use('/api', authRouter);
 app.use('/api', commentsRouter);
 app.use('/api', matchesRouter);
 // app.use('/api', predictionsRouter);
