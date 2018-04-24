@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
@@ -9,6 +10,8 @@ const passport = require('passport');
 const localStrategy = require('./passport/local');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
+
+const jwtStrategy = require('./passport/jwt');
 
 const matchesRouter = require('./router/matches');
 const commentsRouter = require('./router/comments');
@@ -35,12 +38,17 @@ app.use(
 
 //Configure Passport to utilize the strategy
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //Mount router
 app.use('/api', usersRouter);
 app.use('/api', authRouter);
-app.use('/api', commentsRouter);
-app.use('/api', matchesRouter);
+
+// Endpoints below this require a valid JWT
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError :true});
+
+app.use('/api', jwtAuth, commentsRouter);
+app.use('/api', jwtAuth, matchesRouter);
 // app.use('/api', predictionsRouter);
 
 // Catch-all 404

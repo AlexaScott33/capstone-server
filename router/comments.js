@@ -46,37 +46,37 @@ router.post('/matches/:id/comments', (req, res, next) => {
   }
 
 
-  // Match.findById(id)
-  //   .then((match) => {
-  //     // console.log(match)
-  //     Comment.create(newItem)
-  //       .then((comment) => {
-  //         // console.log(comment)
-  //         // res.json(comment);
-  //       })
-  //       .then((comment) => {
-  //         console.log(comment)
-  //         Match.findByIdAndUpdate(id, { comment: match[0].comments.push(comment.id) } );
-  //       })
-  //       .then()
-  //       .catch(err => {
-  //         console.error(err);
-  //         res.status(500).json({message: 'Internal server error'});
-  //       });
-  //   });
-
   Match.findById(id)
     .then((match) => {
+      // console.log(match)
       Comment.create(newItem)
         .then((comment) => {
-          console.log('!!', comment.id);
-          Match.findByIdAndUpdate(id, { comments: match.comments.push(comment.id) } );
+          console.log(comment);
+          res.json(comment);
         })
+        .then((comment) => {
+          // console.log(comment)
+          Match.findByIdAndUpdate(id, { comment: match[0].comments.push(comment.id) } );
+        })
+        .then()
         .catch(err => {
           console.error(err);
           res.status(500).json({message: 'Internal server error'});
         });
     });
+
+  // Match.findById(id)
+  //   .then((match) => {
+  //     Comment.create(newItem)
+  //       .then((comment) => {
+  //         console.log('!!', comment.id);
+  //         Match.findByIdAndUpdate(id, { comments: match.comments.push(comment.id) } );
+  //       })
+  //       .catch(err => {
+  //         console.error(err);
+  //         res.status(500).json({message: 'Internal server error'});
+  //       });
+  //   });
 });
 
 
