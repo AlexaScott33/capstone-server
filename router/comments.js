@@ -27,8 +27,10 @@ router.get('/matches/:id/comments', (req, res) => {
 //create new comment for specific matchId by specific userId
 /* ========== POST/CREATE NEW ITEMS ========== */
 router.post('/matches/:id/comments', (req, res, next) => {
-  const { id  } = req.params; 
-  const { content, userId } = req.body;
+  const { id } = req.params; 
+  const { content } = req.body;
+  const userId = req.user.id;
+  // console.log(userId);
 
   const newItem = { content, userId };
 
@@ -39,26 +41,18 @@ router.post('/matches/:id/comments', (req, res, next) => {
     return next(err);
   }
 
-  if (!userId) {
-    const err = new Error('Missing `userId` in request body');
-    err.status = 400;
-    return next(err);
-  }
-
-
   Match.findById(id)
     .then((match) => {
-      // console.log(match)
+      // console.log(match);
       Comment.create(newItem)
         .then((comment) => {
-          console.log(comment);
-          res.json(comment);
+          // console.log(comment, comment.id);
+          // res.json(comment);
         })
         .then((comment) => {
           // console.log(comment)
-          Match.findByIdAndUpdate(id, { comment: match[0].comments.push(comment.id) } );
+          Match.findByIdAndUpdate(id, { comments: match.comments.push(comment.id) } );
         })
-        .then()
         .catch(err => {
           console.error(err);
           res.status(500).json({message: 'Internal server error'});
@@ -70,7 +64,15 @@ router.post('/matches/:id/comments', (req, res, next) => {
   //     Comment.create(newItem)
   //       .then((comment) => {
   //         console.log('!!', comment.id);
-  //         Match.findByIdAndUpdate(id, { comments: match.comments.push(comment.id) } );
+  //         Match.findByIdAndUpdate(id, { comments: match[0].push(comment.id) } );
+  //       })
+  //       .then(() => {
+  //         Comment.find()
+  //           .where('_id')
+  //           .in(match[0].comments)
+  //           .then(results => {
+  //             res.json(results);
+  //           });
   //       })
   //       .catch(err => {
   //         console.error(err);
@@ -78,7 +80,6 @@ router.post('/matches/:id/comments', (req, res, next) => {
   //       });
   //   });
 });
-
 
 
 module.exports = router;
