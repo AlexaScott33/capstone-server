@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
   content: { type: String },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
 
