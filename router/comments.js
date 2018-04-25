@@ -48,7 +48,7 @@ router.post('/matches/:id/comments', (req, res, next) => {
           match.comments.push(comment);
           match.save()
             .then((result) => {
-              res.json(result);
+              res.json(comment);
             });
         });
     })
