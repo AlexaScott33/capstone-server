@@ -13,16 +13,20 @@ const Comment = require('../models/comment');
 router.get('/matches/:id/comments', (req, res) => {
   const { id } = req.params;
 
-  Match.find( { _id: id } )
-    .then((match) => {
-      Comment.find()
-        .where('_id')
-        .in(match[0].comments)
-        .then(results => {
-          res.json(results);
-        });
+  Match.findOne( { _id: id } )
+    .select('comments')
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'userId',
+        model: 'User'
+      }
+    })
+    .then(results => {
+      res.json(results);
     });
 });
+
 
 //create new comment for specific matchId by specific userId
 /* ========== POST/CREATE NEW ITEMS ========== */
@@ -48,7 +52,17 @@ router.post('/matches/:id/comments', (req, res, next) => {
           match.comments.push(comment);
           match.save()
             .then((result) => {
-              res.json(comment);
+              Match.findById(id)
+                .populate({
+                  path: 'comments',
+                  populate: {
+                    path: 'userId',
+                    model: 'User'
+                  }
+                })
+                .then(comments => {
+                  res.json(comments);
+                });
             });
         });
     })
@@ -57,6 +71,7 @@ router.post('/matches/:id/comments', (req, res, next) => {
       res.status(500).json({message: 'Internal server error'});
     });
 
+    
 
 
   // Match.findById(id)
