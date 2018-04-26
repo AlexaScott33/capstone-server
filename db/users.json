@@ -1,19 +1,22 @@
 [
 {
     "_id": "333333333333333333333300",
-    "fullname": "User Zero",
+    "firstname": "User",
+    "lastname": "Zero",
     "username": "user0",
     "password": "password0"
   },
   {
     "_id": "333333333333333333333301",
-    "fullname": "User One",
+    "firstname": "User",
+    "lastname": "One",
     "username": "user1",
     "password": "password1"
   },
   {
     "_id": "333333333333333333333302",
-    "fullname": "User Two",
+    "firstname": "User",
+    "lastname": "Two",
     "username": "user2",
     "password": "password2"
   }

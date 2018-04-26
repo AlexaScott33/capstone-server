@@ -20,7 +20,7 @@ router.post('/users', (req, res, next) => {
   }
   
   //The fields are type string
-  const stringFields = ['firstName', 'lastName', 'username', 'password'];
+  const stringFields = ['firstname', 'lastname', 'username', 'password'];
   const nonStringFields = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
   
   if(nonStringFields) {
@@ -75,17 +75,17 @@ router.post('/users', (req, res, next) => {
   }
 
   // Username and password were validated as pre-trimmed
-  let { username, password, firstName = '', lastName = '' } = req.body;
-  firstName = firstName.trim();
-  lastName = lastName.trim();
+  let { username, password, firstname = '', lastname = '' } = req.body;
+  firstname = firstname.trim();
+  lastname = lastname.trim();
 
   return User.hashPassword(password)
     .then(digest => {
       const newUser = {
         username,
         password: digest,
-        firstName,
-        lastName
+        firstname,
+        lastname
       };
       return User.create(newUser);
     })
