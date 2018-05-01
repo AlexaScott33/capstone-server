@@ -26,7 +26,7 @@ process.stdout.write('\x1Bc\n');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-describe('Matches API - Matches', function () {
+describe.only('Matches API - Matches', function () {
   let user;
   let token;
 
@@ -60,7 +60,7 @@ describe('Matches API - Matches', function () {
   describe('GET /api/matches', function () {
 
     it('should return the correct number of Matches', function () {
-      const dbPromise = Match.find({ userId: user.id });
+      const dbPromise = Match.find();
       const apiPromise = chai.request(app)
         .get('/api/matches')
         .set('Authorization', `Bearer ${token}`);
@@ -75,7 +75,7 @@ describe('Matches API - Matches', function () {
   });
 
   it('should return a list with the correct right fields', function () {
-    const dbPromise = Match.find({ userId: user.id });
+    const dbPromise = Match.find();
     const apiPromise = chai.request(app)
       .get('/api/matches')
       .set('Authorization', `Bearer ${token}`);
@@ -130,9 +130,6 @@ describe('Matches API - Matches', function () {
         });
     });
   });
-
-
-
 });
 
 
