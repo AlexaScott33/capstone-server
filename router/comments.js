@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const Match = require('../models/match');
 const Comment = require('../models/comment');
 
+
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/matches/:id/comments', (req, res) => {
   const { id } = req.params;
@@ -31,7 +32,6 @@ router.post('/matches/:id/comments', (req, res, next) => {
   const { id } = req.params; 
   const { content } = req.body;
   const userId = req.user.id;
-  // console.log(userId);
 
   const newItem = { content, userId };
 

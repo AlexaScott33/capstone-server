@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const Match = require('../models/match');
 const Comment = require('../models/comment');
 
-//get all matches
+
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/matches', (req, res) => {
   const { commentId, predictionId } = req.query;
@@ -34,12 +34,11 @@ router.get('/matches', (req, res) => {
     });
 });
 
-//get specific match by ID
+
 /* ========== GET/READ A SINGLE ITEM ========== */
 router.get('/matches/:id', (req, res, next) => {
   const { id } = req.params;
 
-  /***** Never trust users - validate input *****/
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error('The `id` is not valid');
     err.status = 400;

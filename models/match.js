@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 
+
 const matchSchema = new mongoose.Schema({
   date: { type: String },
   home: { type: String },
@@ -19,6 +20,7 @@ matchSchema.set('toObject', {
     delete ret.__v;
   }
 });
+
 
 module.exports = mongoose.model('Match', matchSchema);
 

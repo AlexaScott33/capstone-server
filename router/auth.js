@@ -12,6 +12,7 @@ const options = {session: false, failWithError: true};
 
 const localAuth = passport.authenticate('local', options);
 
+
 // ===== Protected endpoint ===== //
 router.post('/login', localAuth, function (req, res) {
   const authToken = createAuthToken(req.user);

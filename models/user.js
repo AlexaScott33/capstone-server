@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-// ===== Define UserSchema & UserModel ===== //
+
 const userSchema = new mongoose.Schema({
   firstname: {type: String},
   lastname: {type: String},
@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
     required: true
   }
 });
+
 
 userSchema.set('toObject', {
   transform: function (doc, ret) {

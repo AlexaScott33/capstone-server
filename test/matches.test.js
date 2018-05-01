@@ -1,6 +1,6 @@
 'use strict';
 
-const app = require('../index');
+const { app } = require('../index');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
@@ -18,7 +18,6 @@ const seedComments = require('../db/comments');
 const seedUsers = require('../db/users');
 
 // Set NODE_ENV to `test` to disable http layer logs
-// You can do this in the command line, but this is cross-platform
 process.env.NODE_ENV = 'test';
 
 // Clear the console before each run
@@ -74,6 +73,66 @@ describe('Matches API - Matches', function () {
         });
     });
   });
+
+  it('should return a list with the correct right fields', function () {
+    const dbPromise = Match.find({ userId: user.id });
+    const apiPromise = chai.request(app)
+      .get('/api/matches')
+      .set('Authorization', `Bearer ${token}`);
+
+    return Promise.all([dbPromise, apiPromise])
+      .then(([data, res]) => {
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('array');
+        expect(res.body).to.have.length(data.length);
+        res.body.forEach(function (item) {
+          expect(item).to.be.a('object');
+          expect(item).to.have.keys('id', 'date', 'home', 'away', 'score', 'comments');
+        });
+      });
+  });
+
+  describe('GET /api/matches/:id', function () {
+
+    it('should return correct matches', function () {
+      let data;
+      return Match.findOne()
+        .then(_data => {
+          data = _data;
+          return chai.request(app)
+            .get(`/api/matches/${data.id}`)
+            .set('Authorization', `Bearer ${token}`);
+        })
+        .then((res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.keys('id', 'date', 'home', 'away', 'score', 'comments');
+
+          expect(res.body.id).to.equal(data.id);
+          expect(res.body.title).to.equal(data.title);
+          expect(res.body.content).to.equal(data.content);
+        });
+    });
+
+    it('should respond with a 400 for improperly formatted id', function () {
+      const badId = '99-99-99';
+
+      return chai.request(app)
+        .get(`/api/matches/${badId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .catch(err => err.response)
+        .then(res => {
+          expect(res).to.have.status(400);
+          expect(res.body.message).to.eq('The `id` is not valid');
+        });
+    });
+  });
+
+
+
 });
 
 

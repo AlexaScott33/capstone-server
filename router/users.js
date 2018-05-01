@@ -99,6 +99,7 @@ router.post('/users', (req, res, next) => {
       }
       next(err);
     });
-}); 
+});
+
 
 module.exports = router;

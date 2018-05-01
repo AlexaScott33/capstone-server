@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-//one value --> string
+
 const predictionSchema = new mongoose.Schema({
   prediction: { type: String, enum: ['home', 'away', 'tie']}
 });
@@ -15,5 +15,6 @@ predictionSchema.set('toObject', {
     delete ret.__v;
   }
 });
+
 
 module.exports = mongoose.model('Prediction', predictionSchema);
