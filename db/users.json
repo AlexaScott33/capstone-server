@@ -4,20 +4,20 @@
     "firstname": "User",
     "lastname": "Zero",
     "username": "user0",
-    "password": "password0"
+    "password": "$2a$10$32jNGd6nmugrIgQl6ClTC.v.QRSHwMLC.XegKx7mnUolEDSaNu7y6"
   },
   {
     "_id": "333333333333333333333301",
     "firstname": "User",
     "lastname": "One",
     "username": "user1",
-    "password": "password1"
+    "password": "$2a$10$32jNGd6nmugrIgQl6ClTC.v.QRSHwMLC.XegKx7mnUolEDSaNu7y6"
   },
   {
     "_id": "333333333333333333333302",
     "firstname": "User",
     "lastname": "Two",
     "username": "user2",
-    "password": "password2"
+    "password": "$2a$10$32jNGd6nmugrIgQl6ClTC.v.QRSHwMLC.XegKx7mnUolEDSaNu7y6"
   }
 ]
