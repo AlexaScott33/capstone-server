@@ -2,6 +2,7 @@
 
 //run tests with the following command:
 // JWT_SECRET=top_secret_key npm test
+
 const { app } = require('../index');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
