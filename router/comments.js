@@ -29,7 +29,7 @@ router.get('/matches/:id/comments', (req, res) => {
 
 /* ========== POST/CREATE NEW ITEMS ========== */
 router.post('/matches/:id/comments', (req, res, next) => {
-  const { id } = req.params; 
+  const { id } = req.params;
   const { content } = req.body;
   const userId = req.user.id;
 
