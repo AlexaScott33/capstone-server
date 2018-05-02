@@ -1,7 +1,7 @@
 {
-  "name": "thinkful-backend-template",
+  "name": "wpl-rugby-commentators",
   "version": "1.0.0",
-  "description": "Template for an Express backend",
+  "description": "WPL Rugby Commentators backend",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -12,7 +12,7 @@
     "heroku": "node index.js",
     "travis": "npm run mocha"
   },
-  "author": "Joe Turner <jturner@thinkful.com>",
+  "author": "Alexa Scott",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
