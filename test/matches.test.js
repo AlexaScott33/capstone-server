@@ -1,7 +1,7 @@
 'use strict';
 
 //run tests with the following command:
-// JWT_SECRET=top_secret_key npm test
+// JWT_SECRET=YOUR_KEY_HERE npm test
 
 const { app } = require('../index');
 const chai = require('chai');

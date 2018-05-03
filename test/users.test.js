@@ -252,7 +252,6 @@ describe('Matches API - Users', function () {
           firstname: ` ${firstname} `,
           lastname
         };
-        //first call api sending in testUser
         return chai.request(app)
           .post('/api/users')
           .send(testUser)
@@ -264,7 +263,6 @@ describe('Matches API - Users', function () {
 
             expect(res.body.username).to.equal(username);
             expect(res.body.firstname).to.equal(firstname);
-            //find user in db and check
             return User.findOne({ username })
               .then(user => {
                 expect(user).to.not.be.null;
@@ -280,7 +278,6 @@ describe('Matches API - Users', function () {
           firstname,
           lastname: ` ${lastname} `
         };
-        //first call api sending in testUser
         return chai.request(app)
           .post('/api/users')
           .send(testUser)
@@ -292,7 +289,6 @@ describe('Matches API - Users', function () {
 
             expect(res.body.username).to.equal(username);
             expect(res.body.lastname).to.equal(lastname);
-            //find user in db and check
             return User.findOne({ username })
               .then(user => {
                 expect(user).to.not.be.null;
