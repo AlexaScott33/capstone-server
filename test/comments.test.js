@@ -86,7 +86,6 @@ describe('Matches API - Comments', function () {
       };
       let body;
       let data;
-      //search for one match then reuse id
       return Match.findOne()
         .then((_data) => {
           data = _data;
