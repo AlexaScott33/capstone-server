@@ -1,20 +1,20 @@
-'use strict';
+// 'use strict';
 
-const mongoose = require('mongoose');
-
-
-const predictionSchema = new mongoose.Schema({
-  prediction: { type: String, enum: ['home', 'away', 'tie']}
-});
+// const mongoose = require('mongoose');
 
 
-predictionSchema.set('toObject', {
-  transform: function (doc, ret) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-  }
-});
+// const predictionSchema = new mongoose.Schema({
+//   prediction: { type: String, enum: ['home', 'away', 'tie']}
+// });
 
 
-module.exports = mongoose.model('Prediction', predictionSchema);
+// predictionSchema.set('toObject', {
+//   transform: function (doc, ret) {
+//     ret.id = ret._id;
+//     delete ret._id;
+//     delete ret.__v;
+//   }
+// });
+
+
+// module.exports = mongoose.model('Prediction', predictionSchema);

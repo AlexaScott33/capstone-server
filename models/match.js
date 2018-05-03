@@ -9,7 +9,6 @@ const matchSchema = new mongoose.Schema({
   away: { type: String },
   score: { type: String },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
-  // predictionId: { type: mongoose.Schema.Types.ObjectId, ref: 'Prediction' },
 });
 
 
