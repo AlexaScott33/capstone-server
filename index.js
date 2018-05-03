@@ -19,8 +19,6 @@ const usersRouter = require('./router/users');
 const authRouter = require('./router/auth');
 
 
-// const predictionsRouter = require('./router/predictions');
-
 const app = express();
 app.use(bodyParser.json());
 
@@ -49,7 +47,6 @@ const jwtAuth = passport.authenticate('jwt', { session: false, failWithError :tr
 
 app.use('/api', jwtAuth, commentsRouter);
 app.use('/api', jwtAuth, matchesRouter);
-// app.use('/api', predictionsRouter);
 
 // // Catch-all 404
 app.use(function (req, res, next) {
