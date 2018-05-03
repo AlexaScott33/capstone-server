@@ -4,3 +4,5 @@ An application designed for Thinkful's Engineering Emmersion full-stack capstone
 
 ## View the Frontend code here:
 https://github.com/AlexaScott33/capstone-client
+
+## View the app on heroku
