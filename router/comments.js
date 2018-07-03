@@ -37,7 +37,7 @@ router.post('/matches/:id/comments', (req, res, next) => {
 
   /***** Never trust users - validate input *****/
   if (!content) {
-    const err = new Error('Missing `content` in request body');
+    const err = new Error('Please fill out the form to leave a comment');
     err.status = 400;
     return next(err);
   }
