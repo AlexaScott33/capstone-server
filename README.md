@@ -33,24 +33,24 @@ https://github.com/AlexaScott33/capstone-client
 ### Matches
 
 * GET (/matches)
-    * Get all matche
+    * Get all matches <br />
         requires: authToken <br />
         responds with all matches
         populates all comments
 
 * GET (/matches/:id)
-    * Get single match by id
+    * Get single match by id <br />
         requires: authToken, match id (req.params.id) <br />
         responds with details for single match
 
 * GET (/matches/:id/comments)
-    * Get all comments for single match
+    * Get all comments for single match <br />
         requires: authToken, match id (req.params.id) <br />
         responds with all comments for specific match
         populates associated user for each comment   
 
 * POST (/matches/:id/comments)
-    * Creates new comment for specific match
+    * Creates new comment for specific match <br />
         requires: authToken, match id (req.params), content (req.body), user id (req.user) <br />
         responds with all comments for specific match
 
