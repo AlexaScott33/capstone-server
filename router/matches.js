@@ -11,15 +11,11 @@ const Comment = require('../models/comment');
 
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/matches', (req, res) => {
-  const { commentId, predictionId } = req.query;
+  const { commentId } = req.query;
 
   let filter = {};
 
   if (commentId) {
-    filter.comments = commentId;
-  }
-
-  if (predictionId) {
     filter.comments = commentId;
   }
 
