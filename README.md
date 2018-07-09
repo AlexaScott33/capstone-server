@@ -40,14 +40,14 @@ https://github.com/AlexaScott33/capstone-client
 
 * GET (/matches/:id)
     * Get single match by id <br />
-        requires: authToken, match id (req.params.id) <br />
+        requires: authToken, match id (req.params) <br />
         responds with details for single match
 
-### Matches
+### Comments
 
 * GET (/matches/:id/comments)
     * Get all comments for single match <br />
-        requires: authToken, match id (req.params.id) <br />
+        requires: authToken, match id (req.params) <br />
         responds with all comments for specific match
         populates associated user for each comment   
 
