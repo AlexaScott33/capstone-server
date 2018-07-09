@@ -43,6 +43,8 @@ https://github.com/AlexaScott33/capstone-client
         requires: authToken, match id (req.params.id) <br />
         responds with details for single match
 
+### Matches
+
 * GET (/matches/:id/comments)
     * Get all comments for single match <br />
         requires: authToken, match id (req.params.id) <br />
